@@ -1,4 +1,3 @@
-import query
 class login:
     def __init__(self, username, password):
         self.username = username
@@ -19,11 +18,8 @@ class register:
     def getUsername(self):
         return(self.username)
     def getPassword(self):
-        return(self.getPassword)
+        return(self.password)
     def getFullName(self):
         return(self.fullname)
     def getEmail(self):
         return(self.email)
-
-register = register("man", "man man", "man@abcd.com", "man123")
-print(query.register(register))
