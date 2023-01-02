@@ -1,35 +1,38 @@
-from db import getDb
- 
-def auth(model):
+def auth(model,db):
     username = model.getUsername()
     password = model.getPassword()
-    cursor = getDb().cursor()
+    cursor = db.getDb().cursor()
+    status = 1
+    log = False
     try:
-        cursor.execute(f'select password from magicAi.Users WHERE userName = "{username}"')
+        cursor.execute(f'select password from magicAi.Users WHERE userName = "{username}" or email = "{username}"')
         dbPassword = (cursor.fetchone()[0])
-        if(dbPassword == password):
-            return 1,True
+        if(dbPassword != None):
+            if(dbPassword == password):
+                print("Auth Success")
+                status, log =  1,True
         else:
-            return 1,False
+            print("Auth Failed")
+            status, log =  1,False
         
     except Exception as e:
-        print("Error logging in")
-        return 0, False
-        
-   
+        print("Error logging in (DB)")
+        print(e)
+        status, log =  0, False
+    
+    return status, log
+    
+    
 
-def register(model):
+
+def register(model,db):
     username = model.getUsername()
-    fullname = model.getFullName()
     email = model.getEmail()
     password = model.getPassword()
-    cursor = getDb().cursor()
+    cursor = db.getDb().cursor()
     try:
-        cursor.execute(f'Insert into magicAi.Users (userName , email , password , fullName) Values ("{username}","{email}","{password}", "{fullname}")')
+        cursor.execute(f'Insert into magicAi.Users (userName , email , password ) Values ("{username}","{email}","{password}")')
         return 1
     except Exception as e:
         print("Error Registering", e)
         return 0
-
-    
-    
