@@ -6,20 +6,17 @@ class login:
     def getUsername(self):
         return(self.username)
     def getPassword(self):
-        return(self.getPassword)
+        return(self.password)
 
 class register:
-    def __init__(self, username, fullname, email, password):
+    def __init__(self, username, email, password):
         self.username = username
         self.password = password
-        self.fullname = fullname
         self.email = email
         
     def getUsername(self):
         return(self.username)
     def getPassword(self):
         return(self.password)
-    def getFullName(self):
-        return(self.fullname)
     def getEmail(self):
         return(self.email)
