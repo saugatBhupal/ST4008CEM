@@ -73,7 +73,7 @@ def getLoginFrame(window,register,controller,login):
     linepwd.place(x=204, y=481)
 
     var = IntVar()
-    check=Checkbutton(loginFrame, text="Keep me logged in", fg="#7066D4", bg="#F5F9FF", variable=var, font=("Quicksand Medium",15), highlightbackground="#7066D4", highlightthickness=1)
+    check=Checkbutton(loginFrame, text="Keep me logged in", fg="#7066D4", bg="#F5F9FF", variable=var, font=("Quicksand Medium",15), highlightbackground="#7066D4", highlightthickness=0)
     check.place(x=204, y=515)
 
     logbutton=Label(loginFrame, text="LOGIN", fg="#ffffff", bg="#7066D4", width=30, height=2, font=("Quicksand SemiBold",17), cursor="hand")
