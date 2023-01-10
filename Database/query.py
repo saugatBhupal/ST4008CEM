@@ -21,18 +21,36 @@ def auth(model,db):
         status, log =  0, False
     
     return status, log
-    
-    
-
 
 def register(model,db):
     username = model.getUsername()
     email = model.getEmail()
+    fullname = model.getFullname()
     password = model.getPassword()
     cursor = db.getDb().cursor()
     try:
-        cursor.execute(f'Insert into magicAi.Users (userName , email , password ) Values ("{username}","{email}","{password}")')
+        cursor.execute(f'Insert into magicAi.Users (userName , email , password, FullName ) Values ("{username}","{email}","{password}", "{fullname}")')
         return 1
     except Exception as e:
         print("Error Registering", e)
         return 0
+
+def delete(db, username):
+    cursor = db.getDb().cursor()
+    try:
+        cursor.execute(f'delete from magicAi.Users where username = "{username}"')
+        return 1
+    except Exception as e :
+        print("Error Deleting Account")
+        return 0
+
+def updatePassword(db,model):
+    username = model.getUsername();
+    password = model.getPassword();
+    cursor = db.getDb().cursor()
+    try:
+        cursor.execute(f'update magicAi.Users set password = "{password}" where username = "{username}"')
+        return 1
+    except Exception as e:
+        print('Error Updating Password')
+        return 0 

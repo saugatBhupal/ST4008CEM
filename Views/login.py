@@ -66,7 +66,7 @@ def getLoginFrame(window,register,controller,login):
     fg_pwd.place(x=479, y=392)
 
     passwordVar = StringVar()
-    pwdinput=Entry(loginFrame,textvariable= passwordVar,  width=32, font=("Quicksand Light Regular",20),foreground="#514F4F",borderwidth=0,background='#F5F9FF')
+    pwdinput=Entry(loginFrame,show = '•', textvariable= passwordVar,  width=26, font=("Quicksand Light Regular",25),foreground="#514F4F",borderwidth=0,background='#F5F9FF')
     pwdinput.place(x=227, y=440)
 
     linepwd=Canvas(loginFrame, width=453, height=1, bg="#7066D4", highlightthickness=0)
@@ -82,7 +82,14 @@ def getLoginFrame(window,register,controller,login):
     logbutton.bind('<Enter>',lambda event: logbutton.config(background='#594CE0'))
     logbutton.bind('<Leave>',lambda event: logbutton.config(background='#7066D4'))
     #logbutton.bind('<Button-1>',lambda event: ( login(controller.login(emailVar.get(), passwordVar.get())) if validate(emailVar.get(), passwordVar.get()) else titleSub.config(text =  "Invalid E-Mail or Password")))
-    logbutton.bind('<Button-1>',lambda event: validate(emailVar.get(), passwordVar.get(), window,register, controller, login,linemail,linepwd))
+    logbutton.bind('<Button-1>',lambda event: validate(emailVar.get(), 
+                                                       passwordVar.get(), 
+                                                       window,
+                                                       register, 
+                                                       controller, 
+                                                       login,
+                                                       linemail,
+                                                       linepwd))
 
     dacc=Label(loginFrame, text="Don't have an account?", font=("Quicksand Medium",15),background='#F5F9FF')
     dacc.place(x=204, y=626)
