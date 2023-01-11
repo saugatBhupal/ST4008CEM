@@ -28,8 +28,10 @@ def register(model,db):
     fullname = model.getFullname()
     password = model.getPassword()
     cursor = db.getDb().cursor()
+    database = db.getDb()
     try:
         cursor.execute(f'Insert into magicAi.Users (userName , email , password, FullName ) Values ("{username}","{email}","{password}", "{fullname}")')
+        database.commit()
         return 1
     except Exception as e:
         print("Error Registering", e)

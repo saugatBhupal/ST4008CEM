@@ -17,7 +17,9 @@ def validate(username, password,window,register,controller, login, linemail, lin
         linepwd.config(bg="#FF0000")
 
 def getRegisterPage(window, register, controller, login):
-    register.getRegistrationFrame(window, register, controller,login)  
+    reg = register.register(window, register, controller,login)
+    reg.getRegistrationFrame()
+    #register.getRegistrationFrame(window, register, controller,login)  
     
 def login(status):
     global log

@@ -24,8 +24,10 @@ def register(username,fullname,email,password):
     status= query.register(model,db)
     if(status ==1):
         print('registered')
+        return True
     else:
         print("Error registering")
+        return False
 
 if __name__ == '__main__':
     mainWindow.window(controller)
