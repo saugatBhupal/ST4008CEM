@@ -63,8 +63,10 @@ def window(controller):
     logoImg = PhotoImage(file='artboards/logo-resized.png')
     logo = Label(window,image=logoImg)
     logo.place(x=80, y=40)
-
-    login.getLoginFrame(window,register,controller,login)
+    
+    log = login.login(window, register, controller, login)
+    log.getLoginFrame()
+    
     highlightAccount(account)
     window.mainloop()
     

@@ -9,7 +9,8 @@ class register:
         
 
     def getLoginFrame(self):
-        self.login.getLoginFrame(self.window, self.register,self.controller, self.login)
+        log = self.login.login(self.window, self.register, self.controller, self.login)
+        log.getLoginFrame()
 
     def validate(self, username, fullname, email, password, confirmpassword):
         if(username,fullname,email,password,confirmpassword != ""):
