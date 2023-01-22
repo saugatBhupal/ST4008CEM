@@ -1,0 +1,10 @@
+{
+    "login": {
+        "status": true,
+        "username": "",
+        "userID": ""
+    },
+    "theme": "dark",
+    "model-save-path": "/abcd/folder",
+    "model-read-path": ""
+}
