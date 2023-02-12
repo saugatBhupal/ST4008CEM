@@ -1,10 +1,7 @@
 from tkinter import *
 import tkinter
-import customtkinter
 from PIL import Image, ImageTk
  
-
-
 def validate(username, password,window,register,controller, login, linemail, linepwd):
     if(str(username).strip() != "" and str(password).strip() != "" ):
        if(controller.login(username,password) == True):
@@ -53,7 +50,7 @@ def getLoginFrame(window,register,controller,login):
     email.place(x=200, y=278, height=23, width=145)
 
     emailVar = StringVar()
-    emailinput=Entry(loginFrame, textvariable= emailVar, width=32, font=("Quicksand Light Regular",20),foreground="#514F4F", borderwidth=0,background='#F5F9FF')
+    emailinput=Entry(loginFrame, textvariable= emailVar, width=32, font=("Quicksand Light Regular",12),foreground="#514F4F", borderwidth=0,background='#F5F9FF')
     emailinput.place(x=227, y=320)
 
     linemail=Canvas(loginFrame, width=470, height=1, bg="#7066D4", highlightthickness=0)
@@ -66,7 +63,7 @@ def getLoginFrame(window,register,controller,login):
     fg_pwd.place(x=460, y=392)
 
     passwordVar = StringVar()
-    pwdinput=Entry(loginFrame,textvariable= passwordVar,  width=32, font=("Quicksand Light Regular",20),foreground="#514F4F",borderwidth=0,background='#F5F9FF')
+    pwdinput=Entry(loginFrame,textvariable= passwordVar,  width=32, font=("Quicksand Light Regular",12),foreground="#514F4F",borderwidth=0,background='#F5F9FF')
     pwdinput.place(x=227, y=440)
 
     linepwd=Canvas(loginFrame, width=470, height=1, bg="#7066D4", highlightthickness=0)

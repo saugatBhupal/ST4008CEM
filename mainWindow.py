@@ -1,12 +1,14 @@
 from tkinter import *
 from Views import login,register
 from PIL import Image, ImageTk
+from Config import config, setting
 
 
 def highlightAccount(account):
     account.config(background='#7066D4',foreground='#ffffff')
 
 def window(controller):
+    theme=setting.theme(config)
     
     window = Tk()
     window.title('Login')
