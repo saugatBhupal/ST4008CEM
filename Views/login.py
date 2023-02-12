@@ -4,12 +4,12 @@ import customtkinter
 from PIL import Image, ImageTk
  
 class login:
-    def __init__(self,window, register,controller, login):
+    def __init__(self,window, register,controller, login, theme):
         self.window = window
         self.register = register
         self.controller = controller
         self.login = login
-        
+        self.theme = theme
     
     def validate(self,username, password, linemail, linepwd):
         if(str(username).strip() != "" and str(password).strip() != "" ):
@@ -28,14 +28,15 @@ class login:
     #register.getRegistrationFrame(window, register, controller,login)  
     
     def getLoginFrame(self):
+        theme = self.theme
     
-        loginFrame = Frame(self.window, background="#F5F9FF")
+        loginFrame = Frame(self.window, background=theme['background-frame'])
         loginFrame.place(x=347,y=0, height=800, width=993)
 
-        title = Label(loginFrame, text="LOGIN",anchor='w',font=('Quicksand Light Regular',30),foreground='#7066D4',background='#F5F9FF')
+        title = Label(loginFrame, text="LOGIN",anchor='w',font=('Quicksand Light Regular',30),foreground=theme['font-color'],background=theme['background-frame'])
         title.place(height=65, width=252,x=199, y = 169)
 
-        titleSub = Label(loginFrame, text="Lorem ipsum dolor sit amet",anchor='w',font=('Quicksand Light',22),foreground='#000000',background='#F5F9FF')
+        titleSub = Label(loginFrame, text="Lorem ipsum dolor sit amet",anchor='w',font=('Quicksand Light',22),foreground=theme['title'],background=theme['background-frame'])
         titleSub.place(height=41, width=431,x=199, y = 225)
 
         lineLeft = Label(loginFrame, background="#7066D4")
@@ -50,31 +51,31 @@ class login:
         lineRightBottom = Label(loginFrame, background="#7066D4")
         lineRightBottom.place(height=75, width=1,x=688, y = 150)
 
-        email=Label(loginFrame, text="Email Address",anchor='w',font=("Quicksand Medium",18),background='#F5F9FF')
+        email=Label(loginFrame, text="Email Address",anchor='w',font=("Quicksand Medium",18),foreground= theme['title'],background=theme['background-frame'])
         email.place(x=204, y=278, height=23,width=145)
 
         emailVar = StringVar()
-        emailinput=Entry(loginFrame, textvariable= emailVar, width=32, font=("Quicksand Light Regular",20),foreground="#514F4F", borderwidth=0,background='#F5F9FF')
+        emailinput=Entry(loginFrame, textvariable= emailVar, width=32, font=("Quicksand Light Regular",20),foreground=theme['title'], borderwidth=0,background=theme['background-frame'])
         emailinput.place(x=227, y=320)
 
         linemail=Canvas(loginFrame, width=453, height=1, bg="#7066D4", highlightthickness=0)
         linemail.place(x=204, y=359)
 
-        pwd=Label(loginFrame, text="Password",font=("Quicksand Medium",18,),background='#F5F9FF')
+        pwd=Label(loginFrame, text="Password",font=("Quicksand Medium",18,),background=theme['background-frame'], foreground=theme['title'])
         pwd.place(x=204, y=390)
 
-        fg_pwd=Label(loginFrame, text="Forgot your Password?", fg="#7066D4", font=("Quicksand SemiBold",17), cursor="hand",background='#F5F9FF')
+        fg_pwd=Label(loginFrame, text="Forgot your Password?", fg=theme['title'], font=("Quicksand SemiBold",17), cursor="hand",background=theme['background-frame'])
         fg_pwd.place(x=479, y=392)
 
         passwordVar = StringVar()
-        pwdinput=Entry(loginFrame,show = '•', textvariable= passwordVar,  width=26, font=("Quicksand Light Regular",25),foreground="#514F4F",borderwidth=0,background='#F5F9FF')
+        pwdinput=Entry(loginFrame,show = '•', textvariable= passwordVar,  width=26, font=("Quicksand Light Regular",25),foreground=theme['title'],borderwidth=0,background=theme['background-frame'])
         pwdinput.place(x=227, y=440)
 
         linepwd=Canvas(loginFrame, width=453, height=1, bg="#7066D4", highlightthickness=0)
         linepwd.place(x=204, y=481)
 
         var = IntVar()
-        check=Checkbutton(loginFrame, text="Keep me logged in", fg="#7066D4", bg="#F5F9FF", variable=var, font=("Quicksand Medium",15), highlightbackground="#7066D4", highlightthickness=0)
+        check=Checkbutton(loginFrame, text="Keep me logged in", fg=theme['font-color'], bg=theme['background-frame'], variable=var, font=("Quicksand Medium",15), highlightbackground="#7066D4", highlightthickness=0)
         check.place(x=204, y=515)
 
         logbutton=Label(loginFrame, text="LOGIN", fg="#ffffff", bg="#7066D4", width=30, height=2, font=("Quicksand SemiBold",17), cursor="hand")
@@ -88,10 +89,10 @@ class login:
                                                        linemail,
                                                        linepwd))
 
-        dacc=Label(loginFrame, text="Don't have an account?", font=("Quicksand Medium",15),background='#F5F9FF')
+        dacc=Label(loginFrame, text="Don't have an account?", font=("Quicksand Medium",15),foreground=theme['title'],background=theme['background-frame'])
         dacc.place(x=204, y=626)
 
-        reg=Label(loginFrame, text="Register", fg="#6E64D7", font=("Quicksand Bold",15), cursor="hand",background='#F5F9FF')
+        reg=Label(loginFrame, text="Register", fg="#6E64D7", font=("Quicksand Bold",15), cursor="hand",background=theme['background-frame'])
         reg.place(x=375, y=626)
         reg.bind('<Button-1>', lambda event: self.getRegisterPage())
     

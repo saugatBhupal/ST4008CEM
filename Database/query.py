@@ -39,8 +39,10 @@ def register(model,db):
 
 def delete(db, username):
     cursor = db.getDb().cursor()
+    database = db.getDb()
     try:
         cursor.execute(f'delete from magicAi.Users where username = "{username}"')
+        database.commit()
         return 1
     except Exception as e :
         print("Error Deleting Account")
@@ -50,8 +52,10 @@ def updatePassword(db,model):
     username = model.getUsername();
     password = model.getPassword();
     cursor = db.getDb().cursor()
+    database = db.getDb()
     try:
         cursor.execute(f'update magicAi.Users set password = "{password}" where username = "{username}"')
+        database.commit()
         return 1
     except Exception as e:
         print('Error Updating Password')
