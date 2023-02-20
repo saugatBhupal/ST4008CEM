@@ -7,10 +7,16 @@ def writeConfig(setting, value):
         json.dump(data,file,indent=4)
         file.truncate()
 
+def saveUser(value):
+    with open('Config/config.json','r+') as file:
+        data = json.load(file)
+        data['login'] = value
+        file.seek(0)
+        json.dump(data,file,indent=4)
+        file.truncate()
+
+
 def readConfig(setting):
-    with open('C:\\Users\\dell\\OneDrive\\Desktop\\ST\\ST4008CEM\\Config\\config.json', 'r') as f:
+    with open('Config/config.json', 'r') as f:
         data = json.load(f)
     return(data[setting])
-
-
-        
