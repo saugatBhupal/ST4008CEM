@@ -5,8 +5,6 @@ def getLoginFrame(window, register, controller, login):
 
 def getRegistrationFrame(window, register, controller, login):
     registrationFrame = Frame(window, background="#F5F9FF")
-
-
     registrationFrame.place(x=347, y=0, height=800, width=993)
 
     title = Label(registrationFrame, text="REGISTER", anchor='w', font=(

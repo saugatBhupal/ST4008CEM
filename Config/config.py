@@ -8,7 +8,7 @@ def writeConfig(setting, value):
         file.truncate()
 
 def readConfig(setting):
-    with open('Config/config.json', 'r') as f:
+    with open('C:\\Users\\dell\\OneDrive\\Desktop\\ST\\ST4008CEM\\Config\\config.json', 'r') as f:
         data = json.load(f)
     return(data[setting])
 
