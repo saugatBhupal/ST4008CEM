@@ -2,30 +2,46 @@ from tkinter import *
 import tkinter
 import customtkinter
 from PIL import Image, ImageTk
+import os
+import sys
  
 class login:
-    def __init__(self,window, register,controller, login, theme):
+    def __init__(self,window, register,controller, login, home, theme, resetPassword):
         self.window = window
         self.register = register
         self.controller = controller
         self.login = login
         self.theme = theme
+        self.home = home
+        self.resetPassword = resetPassword
     
     def validate(self,username, password, linemail, linepwd):
         if(str(username).strip() != "" and str(password).strip() != "" ):
             if(self.controller.login(username,password) == True):
-                self.getRegisterPage()
+                python = sys.executable
+                os.execl(python, python, * sys.argv)
             else:
+                tkinter.messagebox.showerror("Error Message", "Incorrect Credentials. Please Try Again.")
                 linemail.config(bg="#FF0000")
                 linepwd.config(bg="#FF0000")
         else:
+            
+            tkinter.messagebox.showerror("Error Message", "Please Make Sure All The Fields Are Filled Before Submitting")
             linemail.config(bg="#FF0000")
             linepwd.config(bg="#FF0000")
 
     def getRegisterPage(self):
-        reg = self.register.register(self.window, self.register, self.controller,self.login)
+        reg = self.register.register(self.window, self.register, self.controller,self.login,self.home, self.theme, self.resetPassword)
         reg.getRegistrationFrame()
-    #register.getRegistrationFrame(window, register, controller,login)  
+    
+    def getHomePage(self):
+        homePage = self.home.home(self.window,self.controller,self.theme)
+        homePage.getHomePage()
+    
+    def getResetPassword(self):
+        reset = self.resetPassword.resetPassword(self.window, self.theme, True, self.login.login(self.window, self.register, self.controller, self.login,self.home, self.theme, self.resetPassword))
+        reset.getResetPage()
+    
     
     def getLoginFrame(self):
         theme = self.theme
@@ -36,7 +52,7 @@ class login:
         title = Label(loginFrame, text="LOGIN",anchor='w',font=('Quicksand Light Regular',30),foreground=theme['font-color'],background=theme['background-frame'])
         title.place(height=65, width=252,x=199, y = 169)
 
-        titleSub = Label(loginFrame, text="Lorem ipsum dolor sit amet",anchor='w',font=('Quicksand Light',22),foreground=theme['title'],background=theme['background-frame'])
+        titleSub = Label(loginFrame, text="Enter Your Credentials",anchor='w',font=('Quicksand Light',22),foreground=theme['title'],background=theme['background-frame'])
         titleSub.place(height=41, width=431,x=199, y = 225)
 
         lineLeft = Label(loginFrame, background="#7066D4")
@@ -55,7 +71,7 @@ class login:
         email.place(x=204, y=278, height=23,width=145)
 
         emailVar = StringVar()
-        emailinput=Entry(loginFrame, textvariable= emailVar, width=32, font=("Quicksand Light Regular",20),foreground=theme['title'], borderwidth=0,background=theme['background-frame'])
+        emailinput=Entry(loginFrame, textvariable= emailVar, width=32, font=("Quicksand Light Regular",20),foreground=theme['title'], borderwidth=0,background=theme['background-frame'],highlightthickness=0, highlightbackground=theme['background-frame'])
         emailinput.place(x=227, y=320)
 
         linemail=Canvas(loginFrame, width=453, height=1, bg="#7066D4", highlightthickness=0)
@@ -64,11 +80,12 @@ class login:
         pwd=Label(loginFrame, text="Password",font=("Quicksand Medium",18,),background=theme['background-frame'], foreground=theme['title'])
         pwd.place(x=204, y=390)
 
-        fg_pwd=Label(loginFrame, text="Forgot your Password?", fg=theme['title'], font=("Quicksand SemiBold",17), cursor="hand",background=theme['background-frame'])
-        fg_pwd.place(x=479, y=392)
+        fg_pwd=Label(loginFrame, text="Forgot your Password?", fg="#7066D4", font=("Quicksand SemiBold",12), cursor="hand",background=theme['background-frame'])
+        fg_pwd.place(x=530, y=395)
+        fg_pwd.bind('<Button-1>', lambda event:self.getResetPassword())
 
         passwordVar = StringVar()
-        pwdinput=Entry(loginFrame,show = '•', textvariable= passwordVar,  width=26, font=("Quicksand Light Regular",25),foreground=theme['title'],borderwidth=0,background=theme['background-frame'])
+        pwdinput=Entry(loginFrame,show = '•', textvariable= passwordVar,  width=26, font=("Quicksand Light Regular",25),foreground=theme['title'], borderwidth=0,background=theme['background-frame'],highlightthickness=0, highlightbackground=theme['background-frame'])
         pwdinput.place(x=227, y=440)
 
         linepwd=Canvas(loginFrame, width=453, height=1, bg="#7066D4", highlightthickness=0)
@@ -83,7 +100,6 @@ class login:
 
         logbutton.bind('<Enter>',lambda event: logbutton.config(background='#594CE0'))
         logbutton.bind('<Leave>',lambda event: logbutton.config(background='#7066D4'))
-        #logbutton.bind('<Button-1>',lambda event: ( login(controller.login(emailVar.get(), passwordVar.get())) if validate(emailVar.get(), passwordVar.get()) else titleSub.config(text =  "Invalid E-Mail or Password")))
         logbutton.bind('<Button-1>',lambda event: self.validate(emailVar.get(), 
                                                        passwordVar.get(), 
                                                        linemail,

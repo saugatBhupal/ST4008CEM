@@ -88,9 +88,8 @@ class modelPreferences:
         browse_open_file.bind('<Enter>',lambda event: browse_open_file.config(bg='#4638D6',fg='#ffffff'))
         browse_open_file.bind('<Leave>',lambda event: browse_open_file.config(bg='#6E64D7',fg='#ffffff'))
         browse_open_file.bind('<Button-1>',lambda event: entry1.config(text=getFilePath()))
-
-
-
+        
+        
 
         # "Test size:"
         test_size_txt = Label(frame, text="Test Size: ", font=("Quicksand Medium",18), fg="#000000", bg="#F5F9FF")

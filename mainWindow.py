@@ -1,20 +1,44 @@
 from tkinter import *
+from tkinter import messagebox
 from Config import setting, config
-from Views import login,register,home,modelPreferences
+from Views import login,register,home,modelPreferences,settingsPage,resetPassword
 from Model import paramModel, Generator, FilterXY, Heads
 from PIL import Image, ImageTk
+import sys
+import os
 
 
 def highlight(field):
     field.config(background='#7066D4',foreground='#ffffff')
 
+def getLoginStatus():
+    return setting.session(config)
 
+def getHomePage(homePage, field):
+    homePage.getHomePage()
+    highlight(field)
+    
+def getSettingPage(settingPage, field):
+    settingPage.getSettingsPage()
+    highlight(field)
+
+def logout():
+    
+    userDetails = {'status':False,'username':""}
+    config.saveUser(userDetails)
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
+    
 def window(controller):
     theme = setting.theme(config)
-    
+
     window = Tk()
     window.title('Login')
 
+    settingPage = settingsPage.settingsPage(window, theme, config, setting)
+    modelPage = modelPreferences.modelPreferences(window,paramModel,Generator,FilterXY,Heads,setting.readPath(config))
+    homePage = home.home(window,controller,theme, modelPage)
+    
     photo = PhotoImage(file ='artBoards/icon.png') 
     window.wm_iconphoto(False, photo)
     window.geometry("1280x800")
@@ -60,7 +84,7 @@ def window(controller):
 
     line2 = Label(window, background='#7066D4')
     line2.place(x=0, y=517, width=120, height=1)
-
+    
     line1 = Label(window, background='#7066D4')
     line1.place(x=227, y=517, width=120, height=1)
 
@@ -68,15 +92,21 @@ def window(controller):
     logo = Label(window,image=logoImg,background=theme['background-color'])
     logo.place(x=80, y=40)
     
-    if(setting.session(config)):
-        home = modelPreferences.modelPreferences(window,paramModel,Generator,FilterXY,Heads,setting.readPath(config))
-        home.getFrame()
-        # homePage = home.home(window,controller,theme)
-        # homePage.getHomePage()
-        highlight(generateAModel)
+    if(getLoginStatus()):
+        generateAModel.bind('<Button-1>', lambda event: getHomePage(homePage, generateAModel))
+        preferences.bind('<Button-1>', lambda event: getSettingPage(settingPage, preferences))
+        account.config(text="Logout")
+        account.bind('<Button-1>', lambda event: logout())
+    
+    if(not getLoginStatus()):
+        generateAModel.bind('<Button-1>', lambda event: messagebox.showerror("Error Message", "Please Login Or Create An Account First"))
+        preferences.bind('<Button-1>', lambda event: messagebox.showerror("Error Message", "Please Login Or Create An Account First"))
+        
+    if(getLoginStatus()):
+        getHomePage(homePage, generateAModel)
     
     else:    
-        log = login.login(window, register, controller, login, theme)
+        log = login.login(window, register, controller, login, home, theme, resetPassword)
         log.getLoginFrame()
         highlight(account)
     window.mainloop()
