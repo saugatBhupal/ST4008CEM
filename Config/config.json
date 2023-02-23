@@ -1,10 +1,9 @@
 {
     "login": {
         "status": true,
-        "username": "",
-        "userID": ""
+        "username": "saugat@gmail.com"
     },
-    "theme": "dark",
-    "model-save-path": "/abcd/folder",
-    "model-read-path": ""
+    "theme": "light",
+    "model-save-path": "/System/Developer",
+    "model-read-path": "/Users/Shared/Adobe"
 }
