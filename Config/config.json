@@ -1,7 +1,7 @@
 {
     "login": {
-        "status": false,
-        "username": ""
+        "status": true,
+        "username": "saugat@gmail.com"
     },
     "theme": "light",
     "model-save-path": "/Users/saugatsingh",
